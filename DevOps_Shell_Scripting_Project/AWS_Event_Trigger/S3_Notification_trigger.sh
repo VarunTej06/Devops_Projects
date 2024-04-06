@@ -92,9 +92,6 @@ topic_arn=$(aws sns create-topic --name s3-lambda-sns --output json | jq -r '.To
 # Print the TopicArn
 echo "SNS Topic ARN: $topic_arn"
 
-# Trigger SNS Topic using Lambda Function
-
-
 # Add SNS publish permission to the Lambda Function
 aws sns subscribe \
   --topic-arn "$topic_arn" \
