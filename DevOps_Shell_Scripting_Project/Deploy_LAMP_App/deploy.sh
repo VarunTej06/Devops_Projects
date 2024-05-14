@@ -147,7 +147,7 @@ sudo yum update -y
 print_color "green" "Installing Web Server Packages .."
 sudo yum install -y httpd
 sudo yum install -y php
-sudo yum install -y php-mysql
+sudo yum install -y php-mysqlnd
 
 # Configure firewalld rules
 print_color "green" "Configuring FirewallD rules.."
