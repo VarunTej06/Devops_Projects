@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Automate ECommerce Application Deployment
-# Author: Y Sai Varun Teja
+# Author: Mumshad Mannambeth
 
 #######################################
 # Print a message in a given color.
@@ -94,7 +94,6 @@ sudo systemctl enable mariadb
 # Check FirewallD Service is running
 check_service_status mariadb
 
-
 # Configure Firewall rules for Database
 print_color "green" "Configuring FirewallD rules for database.."
 sudo firewall-cmd --permanent --zone=public --add-port=3306/tcp
@@ -136,6 +135,7 @@ else
   exit 1
 fi
 
+
 print_color "green" "---------------- Setup Database Server - Finished ------------------"
 
 print_color "green" "---------------- Setup Web Server ------------------"
@@ -145,7 +145,9 @@ print_color "green" "Updating YUM .."
 sudo yum update -y
 
 print_color "green" "Installing Web Server Packages .."
-sudo yum install -y httpd php php-mysql
+sudo yum install -y httpd
+sudo yum install -y php
+sudo yum install -y php-mysql
 
 # Configure firewalld rules
 print_color "green" "Configuring FirewallD rules.."
@@ -183,3 +185,4 @@ for item in Laptop Drone VR Watch Phone
 do
   check_item "$web_page" $item
 done
+
