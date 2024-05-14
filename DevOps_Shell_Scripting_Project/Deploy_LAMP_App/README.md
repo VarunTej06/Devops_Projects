@@ -10,7 +10,7 @@ On doing above step you had deployed the application manually and it is up and r
 
 Instead of doing this deployment manually, we can automate everystep using shell Scripting. 
 
-deploy.sh is the bash script that automated the deployment of the same application. 
+**deploy.sh** is the bash script that automated the deployment of the same application. 
 
 Can directly run the script in CentOS machine in order to deploy the application.
 
