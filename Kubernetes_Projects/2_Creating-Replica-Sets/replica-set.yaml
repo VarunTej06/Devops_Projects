@@ -1,0 +1,26 @@
+# YAML file for creating replica sets. 
+# No need of pod.YAML file. It is just for reference to create thiss file.
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset      #name of the ReplicaSet
+  labels:                     # assigning label for the replica set
+    app: myapp               
+spec:
+  selector:
+    matchLabels:              #we have to use the label that we gave to our pod while creating it. 
+      env: myapp         # We used this label in pod.yaml file for our pod.
+  replicas: 3
+  template:                   # for template you can use the pod definition from pod.yaml file and then modify.
+    metadata:
+      name: nginx
+      labels:
+        env: myapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+# Label used on top for replica set doesn't matter. 
+# Label used in Pod template and selector is important. They both should be same. 
+# what ever label you change in pod template, have to change it in the selector labels also.

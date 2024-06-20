@@ -1,0 +1,26 @@
+# YAML file for creating Kubernetes Deployments. 
+# Refer to replica set yaml file for references.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment      #name of the Deployment
+  labels:                     # assigning label for the Deployment
+    tier: frontend
+    app: nginx               
+spec:
+  selector:
+    matchLabels:              #we have to use the label that we gave to our pod while creating it. 
+      app: myapp              # We used this label in below Pod template for Pod.
+  replicas: 3
+  template:                   # for Pod template you can use the pod definition from pod.yaml file and then modify.
+    metadata:
+      name: nginx-2
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+# Label used in Pod template and selector is important. They both should be same. 
+# what ever label you change in pod template, have to change it in the selector labels also.
