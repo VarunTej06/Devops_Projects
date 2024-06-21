@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: myapp-Service      #name of the Service               
+spec:
+  type: NodePort
+  ports:
+    - port: 80    # since our image for container is Nginx and it listens on Port 80.
+      targetPort: 80
+      nodePort: 30008
+  selector:
+    app: myapp
