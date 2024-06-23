@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: result-app-pod          # Name of the Pod.
+  labels: 
+    name: result-app-pod        # Label for the Pod.
+    app: demo-voting-app        # Name of the application we are keeping this same in all pod and service yaml files.
+spec:
+  containers:
+    - name: result-app          # Name of the container
+      image: kodekloud/examplevotingapp_result:v1
+      ports:
+        - containerPort: 80

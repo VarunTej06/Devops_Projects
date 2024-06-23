@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres-pod              # Name of the Pod.
+  labels: 
+    name: postgres-pod            # Label for the Pod.
+    app: demo-voting-app       # Name of the application we are keeping this same in all pod and service yaml files.
+spec:
+  containers:
+    - name: postgres              # Name of the container
+      image: postgres
+      ports:
+        - containerPort: 5432
+      env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
+# You need to mention the credentials of postgres DB as they are already hardcoded in the source code. 
+# Use environment variables to declare these values. While creating cnatiner using pod definition file we have to declare them. 
+# If not, result and worker won’t be able to access DB. 

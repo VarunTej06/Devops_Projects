@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db                       # Name of the service. Should give the name that is already hard coded in source code of result app and worker app.
+  labels: 
+    name: postgres-service       # Label for the service.
+    app: demo-voting-app         # Name of the application we are keeping this same in all pod and service yaml files.
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:                      # Copy the lable given to postgres pod in postgres-pod.yaml file and paste it in selector section as it is.
+    name: postgres-pod
+    app: demo-voting-app
+# Since we haven't mentioned type for the service in spec section, by default it will take ClusterIP. 
