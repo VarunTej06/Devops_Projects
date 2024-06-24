@@ -1,0 +1,29 @@
+# can refer to pod definition files that we wrote before for the same service. Can copy some sections also.
+# This is the deployment file - Just like an upgrade to the Pod definition file. 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  labels:
+    name: redis-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:                  # These labels should match with labels inside template of pod in this file.
+      name: redis-pod
+      app: demo-voting-app
+  template:
+# Copy paste whole metadata and spec section from pod definition file.    
+    metadata:
+      name: redis-pod              # Name of the Pod.
+      labels: 
+        name: redis-pod            # Label for the Pod.
+        app: demo-voting-app       # Name of the application we are keeping this same in all pod, service and deployment yaml files.
+    spec:
+      containers:
+        - name: redis              # Name of the container
+          image: redis
+          ports:
+            - containerPort: 6379

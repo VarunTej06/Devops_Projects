@@ -1,0 +1,37 @@
+# can refer to pod definition files that we wrote before for the same service. Can copy some sections also.
+# This is the deployment file - Just like an upgrade to the Pod definition file. 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deploy
+  labels:
+    name: postgres-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:                  # These labels should match with labels inside template of pod in this file.
+      name: postgres-pod
+      app: demo-voting-app
+  template:
+# Copy paste whole metadata and spec section from pod definition file.    
+    metadata:
+      name: postgres-pod              # Name of the Pod.
+      labels: 
+        name: postgres-pod            # Label for the Pod.
+        app: demo-voting-app          # Name of the application we are keeping this same in all pod, service and deployment yaml files.
+    spec:
+      containers:
+        - name: postgres              # Name of the container
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+    # You need to mention the credentials of postgres DB as they are already hardcoded in the source code. 
+    # Use environment variables to declare these values. While creating cnatiner using pod definition file we have to declare them. 
+    # If not, result and worker won’t be able to access DB. 
