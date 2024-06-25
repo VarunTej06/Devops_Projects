@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis                       # Name of the service. Should give the name that is already hard coded in source code of Voting app and worker app.
+  labels: 
+    name: redis-service             # Label for the service.
+    app: demo-voting-app            # Name of the application we are keeping this same in all pod and service yaml files.
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:                         # Copy the lable given to redis pod in redis-pod.yaml file and paste it in selector section as it is.
+    name: redis-pod
+    app: demo-voting-app
+# Since we haven't mentioned type for the service in spec section, by default it will take ClusterIP. 

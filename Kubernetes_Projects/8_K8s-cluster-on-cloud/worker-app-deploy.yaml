@@ -1,0 +1,28 @@
+# can refer to pod definition files that we wrote before for the same app. Can copy some sections also.
+# This is the deployment file - Just like an upgrade to the Pod definition file. 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-app-deploy
+  labels:
+    name: worker-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:                  # These labels should match with labels inside template of pod in this file.
+      name: worker-app-pod
+      app: demo-voting-app
+  template:
+# Copy paste whole metadata and spec section from pod definition file.    
+    metadata:
+      name: worker-app-pod          # Name of the Pod.
+      labels: 
+        name: worker-app-pod        # Label for the Pod.
+        app: demo-voting-app        # Name of the application we are keeping this same in all pod, service and deployment yaml files.
+    spec:
+      containers:
+        - name: worker-app          # Name of the container
+          image: kodekloud/examplevotingapp_worker:v1
+    # Worker app don’t have any services listening. So, no port definition is required. 
